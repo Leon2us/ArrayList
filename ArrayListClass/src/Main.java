@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -5,10 +6,14 @@ import java.util.Scanner;
 public class Main {
 
     static boolean checkNum(int a) {
-        if (a%2==0)
+        if (a % 2 == 0)
             return true;
         else
             return false;
+    }
+
+    static <T> void checkType(T smth) {
+        System.out.println(smth instanceof String);
     }
 
     public static void main(String[] args) {
@@ -19,19 +24,20 @@ public class Main {
 
         ArrayList<Animal> list = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        Scanner scLine = new Scanner(System.in);
 
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 7; i++) {
             System.out.println(i + ". Menu option: " + i);
         }
         System.out.println("Press '0' to exit.");
 
         boolean exit = false;
-        int menuEnter;
-        int remove;
-        int num;
+        int remove, num, b, menuEnter;
+        double a = 0.0;
+        char dot = '.';
 
         do {
-            System.out.println("Please enter from 0 to 5");
+            System.out.println("Please enter from 0 to 7");
             menuEnter = sc.nextInt();
 
             switch (menuEnter) {
@@ -60,10 +66,26 @@ public class Main {
                 case 6:
                     System.out.println("Check the number odd or even - please enter number.");
                     num = sc.nextInt();
-                    if(checkNum(num))
+                    if (checkNum(num))
                         System.out.println("Even");
                     else
                         System.out.println("Odd");
+                    break;
+                case 7:
+                    System.out.println("Add number Integer or Double.");
+                    String str = scLine.nextLine();
+
+                    for (int i = 0; i < str.length(); i++) {
+                        if (str.charAt(i) == dot) {
+                            a = Double.parseDouble(str);
+                            System.out.println("Your number is double = " + a);
+                            break;
+                        }
+                    }
+                    if (a == 0.0) {
+                        b = Integer.parseInt(str);
+                        System.out.println("Your number is Integer = " + b);
+                    }
                     break;
                 case 0:
                     exit = true;
